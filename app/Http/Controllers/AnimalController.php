@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class AnimalController extends Controller
 {
     public function index() {
-        return Animal::paginate(20)->all();
+        return Animal::paginate(20);
     }
 
     public function create(Request $request) {
@@ -25,13 +25,7 @@ class AnimalController extends Controller
     }
 
     public function show($id) {
-        if(Animal::find($id) == $id){
-            return Animal::find($id);
-        }else{
-            return response([
-                'message' => 'not animals'
-            ], 401);
-        }
+        return Animal::find($id);
     }
 
     public function edit(Request $request, $id) {
@@ -45,11 +39,11 @@ class AnimalController extends Controller
         if($dalete) {
             return response([
                 'message' => 'animals deleted succesfully'
-            ],401);
+            ],200);
         }else {
             return response([
                 'message' => 'not animals'
-            ],401); 
+            ],404); 
         }
     }
 }

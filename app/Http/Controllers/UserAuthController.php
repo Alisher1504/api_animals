@@ -23,8 +23,11 @@ class UserAuthController extends Controller
             'password' => bcrypt($data['password'])
         ]);
 
+        $token = $user->createToken('my token')->plainTextToken;
+
         $res = [
             'user' => $user,
+            'token' => $token
         ];
 
         return response($res, 201);
@@ -45,7 +48,7 @@ class UserAuthController extends Controller
             ], 401);
         }
 
-        $token = $user->createToken('myapptoken')->plainTextToken;
+        $token = $user->createToken('my token')->plainTextToken;
 
         $res = [
             'user' => $user,
